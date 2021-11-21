@@ -1,7 +1,8 @@
-import { format, parseISO } from "date-fns";
+import { format, parseISO, yearsToQuarters } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import Image from "next/image";
 import Link from 'next/link';
+import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import { api } from "../../services/api";
@@ -30,7 +31,7 @@ function Episode({ episode }: EpisodeProps) {
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
-                <Link href="/">
+                <Link href="/" passHref>
                     <button type="button">
                         <img src="/arrow-left.svg" alt="Voltar" />
                     </button>

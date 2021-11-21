@@ -1,3 +1,4 @@
+import { useContext } from "react"
 import { GetServerSideProps } from "next"
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,6 +8,7 @@ import ptBR from "date-fns/locale/pt-BR"
 
 import { api } from "../services/api"
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString"
+import { PlayerContext } from "../contexts/PlayerContext"
 
 import styles from './home.module.scss';
 import Head from "next/head"
@@ -28,6 +30,7 @@ type HomeProps = {
 }
 
 function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const { play } = useContext(PlayerContext);
 
   return (
     <div className={styles.homepage}>
@@ -56,7 +59,7 @@ function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 <span>{episode.publishedAt}</span>
                 <span>{episode.durationAsString}</span>
               </div>
-              <button type="button">
+              <button type="button" onClick={() => play(episode)}>
                 <img src="/play-green.svg" alt="Tocar episódio" />
               </button>
             </li>
@@ -98,7 +101,7 @@ function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 <td style={{ width: 100 }}>{episode.publishedAt}</td>
                 <td>{episode.durationAsString}</td>
                 <td>
-                  <button type="button">
+                  <button type="button" onClick={() => play(episode)}>
                     <img src="/play-green.svg" alt="Tocar episódio" />
                   </button>
                 </td>
@@ -126,7 +129,7 @@ export const getStaticProps: GetServerSideProps = async () => {
       title: episode.title,
       thumbnail: episode.thumbnail,
       members: episode.members,
-      publishedAt: format(parseISO(episode.published_at), 'd MMM yy', {locale: ptBR}),
+      publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
       url: episode.file.url,
