@@ -2,13 +2,13 @@ import { format, parseISO, yearsToQuarters } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import Image from "next/image";
 import Link from 'next/link';
-import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
 import styles from './episode.module.scss'
+import { usePlayer } from "../../contexts/PlayerContext";
 
 type Episode = {
     id: string;
@@ -27,6 +27,7 @@ type EpisodeProps = {
 }
 
 function Episode({ episode }: EpisodeProps) {
+    const { play } = usePlayer();
 
     return (
         <div className={styles.episode}>
@@ -43,7 +44,7 @@ function Episode({ episode }: EpisodeProps) {
                     alt={episode.title}
                     objectFit="cover"
                 />
-                <button type="button">
+                <button type="button" onClick = {() => play(episode)}>
                     <img src="/play.svg" alt="Tocar episódio" />
                 </button>
             </div>
