@@ -46,7 +46,7 @@
 
 ```sh
  # Instalar as dependências
- $ yarn
+ $ yarn install
  
  # Run o backend fake
  $ yarn server
