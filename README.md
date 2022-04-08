@@ -18,7 +18,7 @@
   
  ## Sobre o Projeto
 
-  O Podcastr é uma aplicação frontend para a reprodução de episódios em áudio do seu podcast favotito. 
+  O Podcastr é uma aplicação frontend para a reprodução de episódios em áudio do seu podcast favorito. 
   Desenvolvido durante a trilha ReactJS NLW5 da [Rocketseat](nextlevelweek.com), utilizando o framework Next.Js com TypeScript e renderização SSR. </br>
   Durante o evento aprendi a respeito das tecnologias Next.js, React, Typescript, conceito de componentes no React e sobre Server-Side Rendering (SSR), Static Site Generation (SSG)
   e Single page application (SPA).
